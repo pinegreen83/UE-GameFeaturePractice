@@ -8,4 +8,4 @@
 - (없음)
 
 ## In Progress
-- 
+- SKILL-CORE-001
