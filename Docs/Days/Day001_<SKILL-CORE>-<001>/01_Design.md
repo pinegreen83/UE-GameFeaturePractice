@@ -1,5 +1,8 @@
 ## Goal
-Player / AI / 소환수 구분 없이 동일한 스킬 실행 파이프라인을 유지하기 위해, 스킬의 정적 데이터와 런타임 실행 정보를 분리하고 Controller는 입력 의도만 전달하며, SkillComponent가 실행 책임을 지고 Server가 최종 확정하는 구조를 설계한다. 이를 통해 네트워크 권위, 확장성, 유지보수를 동시에 만족하는 스킬 실행 구조를 확보한다.
+Player / AI / 소환수 구분 없이 동일한 스킬 실행 파이프라인을 유지하기 위해, 
+스킬의 정적 데이터와 런타임 실행 정보를 분리하고 Controller는 입력 의도만 전달하며, 
+SkillComponent가 실행 책임을 지고 Server가 최종 확정하는 구조를 설계한다. 
+이를 통해 네트워크 권위, 확장성, 유지보수를 동시에 만족하는 스킬 실행 구조를 확보한다.
 
 ## Class / Component Responsibilities
 Controller (PlayerController / AIController)
@@ -32,20 +35,20 @@ Skill Data (USTRUCT 기반)
 - DataTable 또는 Asset 형태로 관리
 
 ## Data Flow
-1.	입력 단계
+1. 입력 단계
 - PlayerController / AIController가 스킬 사용 의도를 생성
-2.	요청 단계
+2. 요청 단계
 - Controller → SkillComponent로 Intent 전달
-3.	Context 조립
+3. Context 조립
 - SkillComponent가 Candidate Execution Context 생성
-4.	서버 검증
+4. 서버 검증
 - Server RPC 호출
 - 자원 / 쿨다운 / 타겟 검증
 - Authoritative Context 확정
-5.	실행 및 적용
+5. 실행 및 적용
 - 서버에서 데미지, 상태이상, 쿨다운 반영
 - 필요 시 Projectile / Area Actor 생성
-6.	결과 전파
+6. 결과 전파
 - Replication / Multicast로 애니메이션 및 이펙트 동기화
 - 클라이언트 UI는 쿨다운 EndTime 기반으로 표시
 
