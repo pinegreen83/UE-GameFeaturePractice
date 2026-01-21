@@ -10,7 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
-#include "Tickets/SKILL-CORE-001/SkillComponent_SKILL_CORE_001.h"
+#include "Tickets/Day001-SKILL-CORE-001/SkillComponent_SKILL_CORE_001.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 

@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Tickets/SKILL-CORE-001/SkillComponent_SKILL_CORE_001.h"
+#include "Tickets/Day001-SKILL-CORE-001/SkillComponent_SKILL_CORE_001.h"
 
 #include "Net/UnrealNetwork.h"
 #include "GameFramework/Actor.h"

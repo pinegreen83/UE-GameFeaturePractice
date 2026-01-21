@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
-#include "Tickets/SKILL-CORE-001/SkillTypes_SKILL_CORE_001.h"
+#include "Tickets/Day001-SKILL-CORE-001/SkillTypes_SKILL_CORE_001.h"
 #include "SandboxCharacter.generated.h"
 
 class USpringArmComponent;

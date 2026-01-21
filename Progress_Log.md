@@ -5,7 +5,7 @@
 - Day 폴더명 = DayXXX_CATEGORY-ID
 
 ## Completed
-- (없음)
+- SKILL-CORE-001
 
 ## In Progress
-- SKILL-CORE-001
+- SKILL-STATE-001
