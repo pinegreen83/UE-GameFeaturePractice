@@ -5,7 +5,8 @@
 - Day 폴더명 = DayXXX_CATEGORY-ID
 
 ## Completed
-- SKILL-CORE-001
+- Day003-INPUT-INTENT-001
 
 ## In Progress
-- SKILL-STATE-001
+- Day001-SKILL-STATE-001
+- Day002-SKILL-CORE-001
