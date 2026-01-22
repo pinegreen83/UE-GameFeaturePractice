@@ -4,17 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "SkillTypes_SKILL_CORE_001.h"
-#include "SkillComponent_SKILL_CORE_001.generated.h"
+#include "SkillTypes_SK_CO_001.h"
+#include "SkillComponent_SK_CO_001.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class SANDBOX_API USkillComponent_SKILL_CORE_001 : public UActorComponent
+class SANDBOX_API USkillComponent_SK_CO_001 : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
-	USkillComponent_SKILL_CORE_001();
+	USkillComponent_SK_CO_001();
 
 	// Controller/AI가 호출하는 공통 엔트리
 	UFUNCTION(BlueprintCallable, Category = "Skill")

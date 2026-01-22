@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Tickets/Day001-SKILL-CORE-001/SkillComponent_SKILL_CORE_001.h"
+#include "Tickets/Day001-SKILL-CORE-001/SkillComponent_SK_CO_001.h"
 
 #include "Net/UnrealNetwork.h"
 #include "GameFramework/Actor.h"
@@ -24,24 +24,24 @@ static FCooldownEntry_SKILL_CORE_001* FindCooldownEntry(TArray<FCooldownEntry_SK
 	return nullptr;
 }
 
-USkillComponent_SKILL_CORE_001::USkillComponent_SKILL_CORE_001()
+USkillComponent_SK_CO_001::USkillComponent_SK_CO_001()
 {
 	PrimaryComponentTick.bCanEverTick = false;
 	SetIsReplicatedByDefault(true);
 }
 
-void USkillComponent_SKILL_CORE_001::BeginPlay()
+void USkillComponent_SK_CO_001::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
-void USkillComponent_SKILL_CORE_001::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+void USkillComponent_SK_CO_001::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-	DOREPLIFETIME(USkillComponent_SKILL_CORE_001, CooldownEntries_Replicated);
+	DOREPLIFETIME(USkillComponent_SK_CO_001, CooldownEntries_Replicated);
 }
 
-bool USkillComponent_SKILL_CORE_001::RequestActivateSkill(FName SkillId, const FSkillIntentData_SKILL_CORE_001& Intent)
+bool USkillComponent_SK_CO_001::RequestActivateSkill(FName SkillId, const FSkillIntentData_SKILL_CORE_001& Intent)
 {
 	const FSkillDataRow_SKILL_CORE_001* Row = FindSkillRow(SkillId);
 	if (!Row || Row->Policy != ESkillActivationPolicy::Active)
@@ -82,7 +82,7 @@ bool USkillComponent_SKILL_CORE_001::RequestActivateSkill(FName SkillId, const F
 	return true;
 }
 
-void USkillComponent_SKILL_CORE_001::ServerTryActivateSkill_Implementation(FName SkillId, FSkillIntentData_SKILL_CORE_001 Intent)
+void USkillComponent_SK_CO_001::ServerTryActivateSkill_Implementation(FName SkillId, FSkillIntentData_SKILL_CORE_001 Intent)
 {
 	check(GetOwner() && GetOwner()->HasAuthority());
 
@@ -113,7 +113,7 @@ void USkillComponent_SKILL_CORE_001::ServerTryActivateSkill_Implementation(FName
 	ExecuteSkill_Server(SkillId, AuthCtx, *Row);
 }
 
-float USkillComponent_SKILL_CORE_001::GetCooldownRemaining(FName SkillId) const
+float USkillComponent_SK_CO_001::GetCooldownRemaining(FName SkillId) const
 {
 	const float* EndTime = CooldownEndTimes_Cache.Find(SkillId);
 	if (!EndTime) return 0.f;
@@ -122,12 +122,12 @@ float USkillComponent_SKILL_CORE_001::GetCooldownRemaining(FName SkillId) const
 	return FMath::Max(0.f, *EndTime - Now);
 }
 
-bool USkillComponent_SKILL_CORE_001::IsSkillOnCooldown(FName SkillId) const
+bool USkillComponent_SK_CO_001::IsSkillOnCooldown(FName SkillId) const
 {
 	return GetCooldownRemaining(SkillId) > 0.f;
 }
 
-void USkillComponent_SKILL_CORE_001::OnRep_CooldownEntries()
+void USkillComponent_SK_CO_001::OnRep_CooldownEntries()
 {
 	CooldownEndTimes_Cache.Reset();
 
@@ -140,7 +140,7 @@ void USkillComponent_SKILL_CORE_001::OnRep_CooldownEntries()
 	}
 }
 
-bool USkillComponent_SKILL_CORE_001::BuildCandidateContext(FSkillExecutionContext_SKILL_CORE_001& OutCtx,
+bool USkillComponent_SK_CO_001::BuildCandidateContext(FSkillExecutionContext_SKILL_CORE_001& OutCtx,
                                                            const FSkillIntentData_SKILL_CORE_001& Intent) const
 {
 	AActor* OwnerActor = GetOwner();
@@ -157,7 +157,7 @@ bool USkillComponent_SKILL_CORE_001::BuildCandidateContext(FSkillExecutionContex
 	return true;
 }
 
-bool USkillComponent_SKILL_CORE_001::ValidateAndCommit_Server(FName SkillId,
+bool USkillComponent_SK_CO_001::ValidateAndCommit_Server(FName SkillId,
 	const FSkillExecutionContext_SKILL_CORE_001& Ctx, const FSkillDataRow_SKILL_CORE_001& Row)
 {
 	// 1) 쿨다운 체크(서버 권위) - 캐시 기준
@@ -195,7 +195,7 @@ bool USkillComponent_SKILL_CORE_001::ValidateAndCommit_Server(FName SkillId,
 	return true;
 }
 
-void USkillComponent_SKILL_CORE_001::ExecuteSkill_Server(FName SkillId,
+void USkillComponent_SK_CO_001::ExecuteSkill_Server(FName SkillId,
 	const FSkillExecutionContext_SKILL_CORE_001& AuthCtx, const FSkillDataRow_SKILL_CORE_001& Row)
 {
 	check(GetOwner() && GetOwner()->HasAuthority());
@@ -243,7 +243,7 @@ void USkillComponent_SKILL_CORE_001::ExecuteSkill_Server(FName SkillId,
 	MulticastPlaySkillCue(Cue);
 }
 
-void USkillComponent_SKILL_CORE_001::MulticastPlaySkillCue_Implementation(FSkillCueData_SKILL_CORE_001 Cue)
+void USkillComponent_SK_CO_001::MulticastPlaySkillCue_Implementation(FSkillCueData_SKILL_CORE_001 Cue)
 {
 	const FSkillDataRow_SKILL_CORE_001* Row = FindSkillRow(Cue.SkillId);
 	if (!Row) return;
@@ -251,7 +251,7 @@ void USkillComponent_SKILL_CORE_001::MulticastPlaySkillCue_Implementation(FSkill
 	PlayCue_Local(Cue, *Row);
 }
 
-void USkillComponent_SKILL_CORE_001::PlayCue_Local(const FSkillCueData_SKILL_CORE_001& Cue,
+void USkillComponent_SK_CO_001::PlayCue_Local(const FSkillCueData_SKILL_CORE_001& Cue,
 	const FSkillDataRow_SKILL_CORE_001& Row) const
 {
 	// 로컬 연출 : Montage / SFX / VFX (SoftObject는 필요 시 로드)
@@ -293,13 +293,13 @@ void USkillComponent_SKILL_CORE_001::PlayCue_Local(const FSkillCueData_SKILL_COR
 	}
 }
 
-const FSkillDataRow_SKILL_CORE_001* USkillComponent_SKILL_CORE_001::FindSkillRow(FName SkillId) const
+const FSkillDataRow_SKILL_CORE_001* USkillComponent_SK_CO_001::FindSkillRow(FName SkillId) const
 {
 	if (!SkillDataTable) return nullptr;
 	return SkillDataTable->FindRow<FSkillDataRow_SKILL_CORE_001>(SkillId, TEXT("SkillDataLookup"));
 }
 
-void USkillComponent_SKILL_CORE_001::LogSkillEvent(const TCHAR* Event, FName SkillId,
+void USkillComponent_SK_CO_001::LogSkillEvent(const TCHAR* Event, FName SkillId,
 	const FSkillExecutionContext_SKILL_CORE_001* Ctx) const
 {
 	const AActor* OwnerActor = GetOwner();

@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
-#include "SkillTypes_SKILL_CORE_001.generated.h"
+#include "SkillTypes_SK_CO_001.generated.h"
 
 UENUM(BlueprintType)
 enum class ESkillActivationPolicy : uint8

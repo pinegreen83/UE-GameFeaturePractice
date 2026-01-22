@@ -5,14 +5,15 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
-#include "Tickets/Day001-SKILL-CORE-001/SkillTypes_SKILL_CORE_001.h"
+// #include "Tickets/Day001-SKILL-CORE-001/SkillTypes_SK_CO_001.h"
 #include "SandboxCharacter.generated.h"
 
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
-class USkillComponent_SKILL_CORE_001;
+class USkillComponent_SK_ST_001;
+class UControlStateComponent_SK_ST_001;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -32,10 +33,12 @@ class ASandboxCharacter : public ACharacter
 
 	/** Skill Component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Skill, meta = (AllowPrivateAccess = "true"))
-	USkillComponent_SKILL_CORE_001* SkillComponent_SKILL_CORE_001;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Skill, meta = (AllowPrivateAccess = "true"))
-	FSkillIntentData_SKILL_CORE_001 Intent;
+	// USkillComponent_SK_CO_001* SkillComponent_SKILL_CORE_001;
+	USkillComponent_SK_ST_001* SkillComponent_SKILL_STATE_001;
+	UControlStateComponent_SK_ST_001* ControlComponent_SKILL_STATE_001;
+	
+	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Skill, meta = (AllowPrivateAccess = "true"))
+	// FSkillIntentData_SKILL_CORE_001 Intent;
 	
 	/** MappingContext */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
