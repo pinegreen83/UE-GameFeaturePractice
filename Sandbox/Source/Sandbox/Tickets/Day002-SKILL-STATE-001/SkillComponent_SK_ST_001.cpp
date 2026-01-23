@@ -238,17 +238,17 @@ void USkillComponent_SK_ST_001::OnMontageBlendingOut(UAnimMontage* Montage, bool
 }
 
 bool USkillComponent_SK_ST_001::CanCancel(ESkillCancelReason Reason) const
-{
-	// 예시 정책:
-	// - Idle은 캔슬 불필요
-	// - Casting / Executing은 ByPlayerInput / ByHitReact / ByCC 모두 캔슬 가능.
-	// - Cooldown은 캔슬 없음.
-	switch (SkillState)
-	{
-		case ESkillState::Casting:
-		case ESkillState::Executing:
-			return true;
-		default:
-			return false;
-	}
-}
+ {
+ 	// 예시 정책:
+ 	// - Idle은 캔슬 불필요
+ 	// - Casting / Executing은 ByPlayerInput / ByHitReact / ByCC 모두 캔슬 가능.
+ 	// - Cooldown은 캔슬 없음.
+ 	switch (SkillState)
+ 	{
+ 		case ESkillState::Casting:
+ 		case ESkillState::Executing:
+ 			return true;
+ 		default:
+ 			return false;
+ 	}
+ }

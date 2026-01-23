@@ -11,8 +11,8 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 //#include "Tickets/Day001-SKILL-CORE-001/SkillComponent_SK_CO_001.h"
-#include "Tickets/Day002-SKILL-STATE-001/SkillComponent_SK_ST_001.h"
-#include "Tickets/Day002-SKILL-STATE-001/ControlStateComponent_SK_ST_001.h"
+// #include "Tickets/Day002-SKILL-STATE-001/SkillComponent_SK_ST_001.h"
+// #include "Tickets/Day002-SKILL-STATE-001/ControlStateComponent_SK_ST_001.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -55,8 +55,8 @@ ASandboxCharacter::ASandboxCharacter()
 
 	// SkillComponent
 	// SkillComponent_SKILL_CORE_001 = CreateDefaultSubobject<USkillComponent_SK_ST_001>(TEXT("SkillComponent_SKILL_STATE_001"));
-	SkillComponent_SKILL_STATE_001 = CreateDefaultSubobject<USkillComponent_SK_ST_001>(TEXT("SkillComponent_SK_ST_001"));
-	ControlComponent_SKILL_STATE_001 = CreateDefaultSubobject<UControlStateComponent_SK_ST_001>(TEXT("ControlComponent_SK_ST_001"));
+	// SkillComponent_SKILL_STATE_001 = CreateDefaultSubobject<USkillComponent_SK_ST_001>(TEXT("SkillComponent_SK_ST_001"));
+	// ControlComponent_SKILL_STATE_001 = CreateDefaultSubobject<UControlStateComponent_SK_ST_001>(TEXT("ControlComponent_SK_ST_001"));
 	
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -78,19 +78,19 @@ void ASandboxCharacter::UseSkill()
 	//
 	// SkillComponent_SKILL_CORE_001->RequestActivateSkill("Test1", Intent);
 	
-	SkillComponent_SKILL_STATE_001->TryStartSkill();
+	// SkillComponent_SKILL_STATE_001->TryStartSkill();
 }
 
 void ASandboxCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	// Add Input Mapping Context
-	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
-	{
-		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
-		{
-			Subsystem->AddMappingContext(DefaultMappingContext, 0);
-		}
-	}
+	// if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
+	// {
+	// 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+	// 	{
+	// 		Subsystem->AddMappingContext(DefaultMappingContext, 0);
+	// 	}
+	// }
 	
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
