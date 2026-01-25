@@ -13,6 +13,7 @@
 //#include "Tickets/Day001-SKILL-CORE-001/SkillComponent_SK_CO_001.h"
 // #include "Tickets/Day002-SKILL-STATE-001/SkillComponent_SK_ST_001.h"
 // #include "Tickets/Day002-SKILL-STATE-001/ControlStateComponent_SK_ST_001.h"
+#include "Tickets/Day004-SKILL-NET-AUTH-001/SkillComponent_SK_NE_001.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -54,9 +55,10 @@ ASandboxCharacter::ASandboxCharacter()
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
 	// SkillComponent
-	// SkillComponent_SKILL_CORE_001 = CreateDefaultSubobject<USkillComponent_SK_ST_001>(TEXT("SkillComponent_SKILL_STATE_001"));
+	// SkillComponent_SKILL_CORE_001 = CreateDefaultSubobject<USkillComponent_SK_CO_001>(TEXT("SkillComponent_SKILL_STATE_001"));
 	// SkillComponent_SKILL_STATE_001 = CreateDefaultSubobject<USkillComponent_SK_ST_001>(TEXT("SkillComponent_SK_ST_001"));
 	// ControlComponent_SKILL_STATE_001 = CreateDefaultSubobject<UControlStateComponent_SK_ST_001>(TEXT("ControlComponent_SK_ST_001"));
+	SkillComponent_SKILL_NET_001 = CreateDefaultSubobject<USkillComponent_SK_NE_001>(TEXT("SkillComponent_SK_NE_001"));
 	
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -79,6 +81,11 @@ void ASandboxCharacter::UseSkill()
 	// SkillComponent_SKILL_CORE_001->RequestActivateSkill("Test1", Intent);
 	
 	// SkillComponent_SKILL_STATE_001->TryStartSkill();
+
+	if (SkillComponent_SKILL_NET_001) 
+	{
+		SkillComponent_SKILL_NET_001->RequestSkillUseSimple(FName("Skill_1"));	
+	}
 }
 
 void ASandboxCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
