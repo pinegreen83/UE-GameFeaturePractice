@@ -18,3 +18,5 @@
 [Constraints]
 - 기술적 제약 조건
 - 사용 불가한 방식, 반드시 지켜야 할 구조, 환경 조건 등
+
+[Definition of Done]
