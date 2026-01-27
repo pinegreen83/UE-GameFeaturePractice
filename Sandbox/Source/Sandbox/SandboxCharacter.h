@@ -15,6 +15,8 @@ class UInputAction;
 class USkillComponent_SK_ST_001;
 class UControlStateComponent_SK_ST_001;
 class USkillComponent_SK_NE_001;
+class USkillComponent_SK_CO_RE_001;
+class UStatComponent_SK_CO_RE_001;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -37,10 +39,12 @@ class ASandboxCharacter : public ACharacter
 	// USkillComponent_SK_CO_001* SkillComponent_SKILL_CORE_001;
 	// USkillComponent_SK_ST_001* SkillComponent_SKILL_STATE_001;
 	// UControlStateComponent_SK_ST_001* ControlComponent_SKILL_STATE_001;
-	TObjectPtr<USkillComponent_SK_NE_001> SkillComponent_SKILL_NET_001;
+	// TObjectPtr<USkillComponent_SK_NE_001> SkillComponent_SKILL_NET_001;
+	TObjectPtr<USkillComponent_SK_CO_RE_001> SkillComponent;
 	
-	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Skill, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Skill, meta = (AllowPrivateAccess = "true"))
 	// FSkillIntentData_SKILL_CORE_001 Intent;
+	TObjectPtr<UStatComponent_SK_CO_RE_001> StatComponent;
 	
 	/** MappingContext */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
