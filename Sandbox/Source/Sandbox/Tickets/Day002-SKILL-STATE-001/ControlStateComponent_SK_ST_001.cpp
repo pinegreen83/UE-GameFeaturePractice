@@ -6,7 +6,6 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 
-DEFINE_LOG_CATEGORY_STATIC(LogSkillState, Log, All);
 DEFINE_LOG_CATEGORY_STATIC(LogControlState, Log, All);
 
 UControlStateComponent_SK_ST_001::UControlStateComponent_SK_ST_001()

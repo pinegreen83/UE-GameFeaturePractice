@@ -7,7 +7,6 @@
 #include "TimerManager.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogSkillState, Log, All);
-DEFINE_LOG_CATEGORY_STATIC(LogControlState, Log, All);
 
 USkillComponent_SK_ST_001::USkillComponent_SK_ST_001()
 {
