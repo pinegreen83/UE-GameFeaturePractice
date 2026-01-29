@@ -17,6 +17,7 @@ class UControlStateComponent_SK_ST_001;
 class USkillComponent_SK_NE_001;
 class USkillComponent_SK_CO_RE_001;
 class UStatComponent_SK_CO_RE_001;
+class UInventoryComponent_IN_AU_001;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -45,6 +46,9 @@ class ASandboxCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Skill, meta = (AllowPrivateAccess = "true"))
 	// FSkillIntentData_SKILL_CORE_001 Intent;
 	TObjectPtr<UStatComponent_SK_CO_RE_001> StatComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Inventory, meta =(AllowPrivateAccess = "true"))
+	TObjectPtr<UInventoryComponent_IN_AU_001> InventoryComponent;
 	
 	/** MappingContext */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -68,7 +72,7 @@ class ASandboxCharacter : public ACharacter
 
 public:
 	ASandboxCharacter();
-
+	
 protected:
 
 	/** Called for movement input */

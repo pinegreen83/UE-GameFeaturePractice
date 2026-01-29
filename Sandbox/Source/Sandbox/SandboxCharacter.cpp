@@ -16,6 +16,7 @@
 // #include "Tickets/Day004-SKILL-NET-AUTH-001/SkillComponent_SK_NE_001.h"
 #include "Tickets/Day005-SKILL-COOLDOWN-RESOURCE-001/SkillComponent_SK_CO_RE_001.h"
 #include "Tickets/Day005-SKILL-COOLDOWN-RESOURCE-001/StatComponent_SK_CO_RE_001.h"
+#include "Tickets/Day007-INV-AUTH-BASE-001/InventoryComponent_IN_AU_001.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -63,6 +64,7 @@ ASandboxCharacter::ASandboxCharacter()
 	// SkillComponent_SKILL_NET_001 = CreateDefaultSubobject<USkillComponent_SK_NE_001>(TEXT("SkillComponent_SK_NE_001"));
 	SkillComponent = CreateDefaultSubobject<USkillComponent_SK_CO_RE_001>(TEXT("SkillComponent_SK_CO_RE_001"));
 	StatComponent = CreateDefaultSubobject<UStatComponent_SK_CO_RE_001>(TEXT("StatComponent_SK_CO_RE_001"));
+	InventoryComponent = CreateDefaultSubobject<UInventoryComponent_IN_AU_001>(TEXT("InventoryComponent"));
 	
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
