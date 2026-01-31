@@ -18,6 +18,8 @@ class USkillComponent_SK_NE_001;
 class USkillComponent_SK_CO_RE_001;
 class UStatComponent_SK_CO_RE_001;
 class UInventoryComponent_IN_AU_001;
+class UInteractionComponent_WO_IN_001;
+class USphereComponent;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -49,6 +51,12 @@ class ASandboxCharacter : public ACharacter
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Inventory, meta =(AllowPrivateAccess = "true"))
 	TObjectPtr<UInventoryComponent_IN_AU_001> InventoryComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Interact, meta =(AllowPrivateAccess = "true"))
+	TObjectPtr<UInteractionComponent_WO_IN_001> InteractComponent;
+
+	UPROPERTY(VisibleAnywhere, Category = Interact, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<USphereComponent> InteractSphere;
 	
 	/** MappingContext */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -90,6 +98,16 @@ protected:
 	
 	// To add mapping context
 	virtual void BeginPlay();
+
+private:
+	UFUNCTION()
+	void OnInteractSphereBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+										UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
+										bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void OnInteractSphereEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+									UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 public:
 	/** Returns CameraBoom subobject **/

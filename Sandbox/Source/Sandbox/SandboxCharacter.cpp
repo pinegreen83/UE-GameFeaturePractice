@@ -14,9 +14,11 @@
 // #include "Tickets/Day002-SKILL-STATE-001/SkillComponent_SK_ST_001.h"
 // #include "Tickets/Day002-SKILL-STATE-001/ControlStateComponent_SK_ST_001.h"
 // #include "Tickets/Day004-SKILL-NET-AUTH-001/SkillComponent_SK_NE_001.h"
+#include "Components/SphereComponent.h"
 #include "Tickets/Day005-SKILL-COOLDOWN-RESOURCE-001/SkillComponent_SK_CO_RE_001.h"
 #include "Tickets/Day005-SKILL-COOLDOWN-RESOURCE-001/StatComponent_SK_CO_RE_001.h"
 #include "Tickets/Day007-INV-AUTH-BASE-001/InventoryComponent_IN_AU_001.h"
+#include "Tickets/Day008-WORLD-INTERACT-BASE-001/Interaction/InteractionComponent_WO_IN_001.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -65,6 +67,26 @@ ASandboxCharacter::ASandboxCharacter()
 	SkillComponent = CreateDefaultSubobject<USkillComponent_SK_CO_RE_001>(TEXT("SkillComponent_SK_CO_RE_001"));
 	StatComponent = CreateDefaultSubobject<UStatComponent_SK_CO_RE_001>(TEXT("StatComponent_SK_CO_RE_001"));
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent_IN_AU_001>(TEXT("InventoryComponent"));
+	InteractComponent = CreateDefaultSubobject<UInteractionComponent_WO_IN_001>(TEXT("InteractionComponent"));
+	
+	InteractSphere = CreateDefaultSubobject<USphereComponent>(TEXT("InteractSphere"));
+	InteractSphere->SetupAttachment(RootComponent);
+	InteractSphere->InitSphereRadius(200.0f);
+
+	// Overlap 전용
+	InteractSphere->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	InteractSphere->SetCollisionObjectType(ECC_Pawn);
+
+	// 기본은 다 무시하고 필요한 것만 Overlap
+	InteractSphere->SetCollisionResponseToAllChannels(ECR_Ignore);
+	// 월드 오브젝트(문/상자/픽업 등)가 주로 WorldDynamic/WorldStatic일 수 있어서 둘 다 열어둠
+	InteractSphere->SetCollisionResponseToChannel(ECC_WorldDynamic, ECR_Overlap);
+	InteractSphere->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Overlap);
+
+	InteractSphere->SetGenerateOverlapEvents(true);
+	
+	InteractSphere->OnComponentBeginOverlap.AddDynamic(this, &ASandboxCharacter::OnInteractSphereBeginOverlap);
+	InteractSphere->OnComponentEndOverlap.AddDynamic(this, &ASandboxCharacter::OnInteractSphereEndOverlap);
 	
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -74,6 +96,24 @@ void ASandboxCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+}
+
+void ASandboxCharacter::OnInteractSphereBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (InteractComponent && OtherActor && OtherActor != this)
+	{
+		InteractComponent->NotifyBeginOverlap(OtherActor);
+	}
+}
+
+void ASandboxCharacter::OnInteractSphereEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	if (InteractComponent && OtherActor && OtherActor != this)
+	{
+		InteractComponent->NotifyEndOverlap(OtherActor);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -108,13 +148,13 @@ void ASandboxCharacter::UseSkill()
 void ASandboxCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	// Add Input Mapping Context
-	// if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
-	// {
-	// 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
-	// 	{
-	// 		Subsystem->AddMappingContext(DefaultMappingContext, 0);
-	// 	}
-	// }
+	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			Subsystem->AddMappingContext(DefaultMappingContext, 0);
+		}
+	}
 	
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
