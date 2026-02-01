@@ -8,6 +8,7 @@
 // #include "Tickets/Day001-SKILL-CORE-001/SkillTypes_SK_CO_001.h"
 #include "SandboxCharacter.generated.h"
 
+class UFeedbackDebugComponent_UI_FE_001;
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
@@ -19,6 +20,7 @@ class USkillComponent_SK_CO_RE_001;
 class UStatComponent_SK_CO_RE_001;
 class UInventoryComponent_IN_AU_001;
 class UInteractionComponent_WO_IN_001;
+class USkillComponent_UI_FE_001;
 class USphereComponent;
 struct FInputActionValue;
 
@@ -43,7 +45,11 @@ class ASandboxCharacter : public ACharacter
 	// USkillComponent_SK_ST_001* SkillComponent_SKILL_STATE_001;
 	// UControlStateComponent_SK_ST_001* ControlComponent_SKILL_STATE_001;
 	// TObjectPtr<USkillComponent_SK_NE_001> SkillComponent_SKILL_NET_001;
-	TObjectPtr<USkillComponent_SK_CO_RE_001> SkillComponent;
+	// TObjectPtr<USkillComponent_SK_CO_RE_001> SkillComponent;
+	TObjectPtr<USkillComponent_UI_FE_001> SkillComponent_UI_FE_001;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Debug, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UFeedbackDebugComponent_UI_FE_001> DebugComponent_UI_Fe_001;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Skill, meta = (AllowPrivateAccess = "true"))
 	// FSkillIntentData_SKILL_CORE_001 Intent;

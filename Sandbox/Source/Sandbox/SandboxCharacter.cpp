@@ -19,6 +19,8 @@
 #include "Tickets/Day005-SKILL-COOLDOWN-RESOURCE-001/StatComponent_SK_CO_RE_001.h"
 #include "Tickets/Day007-INV-AUTH-BASE-001/InventoryComponent_IN_AU_001.h"
 #include "Tickets/Day008-WORLD-INTERACT-BASE-001/Interaction/InteractionComponent_WO_IN_001.h"
+#include "Tickets/Day009-UI-FEEDBACK-BASE-001/FeedbackDebugComponent_UI_FE_001.h"
+#include "Tickets/Day009-UI-FEEDBACK-BASE-001/SkillComponent_UI_FE_001.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -64,10 +66,12 @@ ASandboxCharacter::ASandboxCharacter()
 	// SkillComponent_SKILL_STATE_001 = CreateDefaultSubobject<USkillComponent_SK_ST_001>(TEXT("SkillComponent_SK_ST_001"));
 	// ControlComponent_SKILL_STATE_001 = CreateDefaultSubobject<UControlStateComponent_SK_ST_001>(TEXT("ControlComponent_SK_ST_001"));
 	// SkillComponent_SKILL_NET_001 = CreateDefaultSubobject<USkillComponent_SK_NE_001>(TEXT("SkillComponent_SK_NE_001"));
-	SkillComponent = CreateDefaultSubobject<USkillComponent_SK_CO_RE_001>(TEXT("SkillComponent_SK_CO_RE_001"));
+	// SkillComponent = CreateDefaultSubobject<USkillComponent_SK_CO_RE_001>(TEXT("SkillComponent_SK_CO_RE_001"));
+	SkillComponent_UI_FE_001 = CreateDefaultSubobject<USkillComponent_UI_FE_001>(TEXT("SkillComponent_UI_FE_001"));
 	StatComponent = CreateDefaultSubobject<UStatComponent_SK_CO_RE_001>(TEXT("StatComponent_SK_CO_RE_001"));
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent_IN_AU_001>(TEXT("InventoryComponent"));
 	InteractComponent = CreateDefaultSubobject<UInteractionComponent_WO_IN_001>(TEXT("InteractionComponent"));
+	DebugComponent_UI_Fe_001 = CreateDefaultSubobject<UFeedbackDebugComponent_UI_FE_001>(TEXT("DebugComponent_UI_FE_001"));
 	
 	InteractSphere = CreateDefaultSubobject<USphereComponent>(TEXT("InteractSphere"));
 	InteractSphere->SetupAttachment(RootComponent);
@@ -121,6 +125,8 @@ void ASandboxCharacter::OnInteractSphereEndOverlap(UPrimitiveComponent* Overlapp
 
 void ASandboxCharacter::UseSkill()
 {
+	UE_LOG(LogTemp, Log, TEXT("Using Skill"));
+	
 	// Intent.Origin = GetActorLocation();
 	// Intent.AimDir = GetActorForwardVector();
 	//
@@ -139,9 +145,19 @@ void ASandboxCharacter::UseSkill()
 
 	FName SkillId = FName(TEXT("SkillTest"));
 	
-	if (SkillComponent)
+	// if (SkillComponent)
+	// {
+	// 	SkillComponent->RequestActivateSkill(SkillId, Intent);
+	// }
+	
+	if(SkillComponent_UI_FE_001)
 	{
-		SkillComponent->RequestActivateSkill(SkillId, Intent);
+		UE_LOG(LogTemp, Log, TEXT("skillcomp O"));
+		SkillComponent_UI_FE_001->RequestSkillUseSimple(SkillId);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("skillcomp X"));
 	}
 }
 

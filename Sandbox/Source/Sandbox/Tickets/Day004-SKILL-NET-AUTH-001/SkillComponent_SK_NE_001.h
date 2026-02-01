@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "Net/Serialization/FastArraySerializer.h"
 #include "SandboxSkillTypes.h"
 #include "SkillComponent_SK_NE_001.generated.h"
 
