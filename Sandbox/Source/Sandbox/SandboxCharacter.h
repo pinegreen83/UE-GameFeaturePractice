@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "Tickets/Day010-PLAYER-DEATH-RESPAWN-BASE-001/LifeStateComponent_PL_DE_001.h"
+#include "Tickets/Day010-PLAYER-DEATH-RESPAWN-BASE-001/StatComponent_PL_DE_001.h"
 // #include "Tickets/Day001-SKILL-CORE-001/SkillTypes_SK_CO_001.h"
 #include "SandboxCharacter.generated.h"
 
@@ -51,10 +53,14 @@ class ASandboxCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Debug, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UFeedbackDebugComponent_UI_FE_001> DebugComponent_UI_Fe_001;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Skill, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = "true"))
 	// FSkillIntentData_SKILL_CORE_001 Intent;
-	TObjectPtr<UStatComponent_SK_CO_RE_001> StatComponent;
+	// TObjectPtr<UStatComponent_SK_CO_RE_001> StatComponent;
+	TObjectPtr<UStatComponent_PL_DE_001> StatComponent_PL_DE_001;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = State, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<ULifeStateComponent_PL_DE_001> StateComponent_PL_DE_001;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Inventory, meta =(AllowPrivateAccess = "true"))
 	TObjectPtr<UInventoryComponent_IN_AU_001> InventoryComponent;
 

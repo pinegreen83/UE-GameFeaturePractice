@@ -68,10 +68,12 @@ ASandboxCharacter::ASandboxCharacter()
 	// SkillComponent_SKILL_NET_001 = CreateDefaultSubobject<USkillComponent_SK_NE_001>(TEXT("SkillComponent_SK_NE_001"));
 	// SkillComponent = CreateDefaultSubobject<USkillComponent_SK_CO_RE_001>(TEXT("SkillComponent_SK_CO_RE_001"));
 	SkillComponent_UI_FE_001 = CreateDefaultSubobject<USkillComponent_UI_FE_001>(TEXT("SkillComponent_UI_FE_001"));
-	StatComponent = CreateDefaultSubobject<UStatComponent_SK_CO_RE_001>(TEXT("StatComponent_SK_CO_RE_001"));
+	// StatComponent = CreateDefaultSubobject<UStatComponent_SK_CO_RE_001>(TEXT("StatComponent_SK_CO_RE_001"));
+	StatComponent_PL_DE_001 = CreateDefaultSubobject<UStatComponent_PL_DE_001>(TEXT("StatComponent_PL_DE_001"));
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent_IN_AU_001>(TEXT("InventoryComponent"));
 	InteractComponent = CreateDefaultSubobject<UInteractionComponent_WO_IN_001>(TEXT("InteractionComponent"));
 	DebugComponent_UI_Fe_001 = CreateDefaultSubobject<UFeedbackDebugComponent_UI_FE_001>(TEXT("DebugComponent_UI_FE_001"));
+	StateComponent_PL_DE_001 = CreateDefaultSubobject<ULifeStateComponent_PL_DE_001>(TEXT("StateComponent_PL_DE_001"));
 	
 	InteractSphere = CreateDefaultSubobject<USphereComponent>(TEXT("InteractSphere"));
 	InteractSphere->SetupAttachment(RootComponent);
